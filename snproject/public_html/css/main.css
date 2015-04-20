@@ -20,12 +20,14 @@ and open the template in the editor.
     display: none;
 }
 .noinput {
+    padding: initial;
     line-height: inherit !important;
     outline: none;
     border: none !important;
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
+    background-color: inherit;
 }
 
 ._MODAL_EDIT_TITLE {}

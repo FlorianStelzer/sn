@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/main.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/jquery/jquery.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <!-- Navigation bar und toggle button für kleine Devices -->
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" 
+                            class="navbar-toggle collapsed" 
+                            data-toggle="collapse" 
+                            data-target="#nav_content">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">TU-ToDo</a>
+                </div>
+                <!-- Die eigentlichen Navigations-Elemente -->
+                <div class="collapse navbar-collapse" 
+                     id="nav_content">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Liste</a></li>
+                        <li><a class="" href="#">Einstellungen</a></li>
+                        <li><a class="" href="#">Ausloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Edit</li>
+            </ol>
+            <div class="">
+                <div class="panel panel-info">
+                    <form>
+                        <div class="panel-heading">
+                            <h4 class="modal-title">Bearbeiten</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p>Du bearbeitest gerade Dein TODO "Existierendes TODO"</p>
+                            <label for="title">Titel</label>
+                            <input class="form-control" type="text" value="Existierendes TODO" id="title" name="title" placeholder="Neuer Titel" />
+                            <label for="deadline">Deadline</label>
+                            <input class="form-control" id="deadline" value="2015-05-03T14:00" type="datetime-local"  name="deadline"/>
+                            <label for="finished">Finished</label>
+                            <div class="input-group">
+                                <input class="form-control" id="finished" value="50" type="number" name="finished" value="0" min="0" max="100" />
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="save-btn btn btn-success">
+                                <span class="text">Speichern</span>
+                            </button>
+                            <button type="reset" class="btn btn-default">Zurücksetzen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center">
+            <a class="btn btn-link" href="impressum.html">Impressum</a>
+        </footer>
+    </body>
+</html>
