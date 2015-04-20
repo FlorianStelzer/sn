@@ -32,7 +32,10 @@ and open the template in the editor.
                             <label for="deadline">Deadline</label>
                             <input class="form-control" id="deadline" type="datetime-local"  name="deadline"/>
                             <label for="finished">Finished</label>
-                            <input class="form-control" id="finished" type="number" name="finished" min="0" max="100" />
+                            <div class="input-group">
+                                <input class="form-control" id="finished" type="number" name="finished" min="0" max="100" />
+                                <span class="input-group-addon">%</span>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">

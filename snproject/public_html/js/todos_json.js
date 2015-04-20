@@ -50,7 +50,7 @@ function get_todos() {
         },
         {
             id: 8,
-            title: 'Auto waschen',
+            title: 'Auto mieten',
             deadline: '2015-04-01T15:00:00',
             finished: 40
         }

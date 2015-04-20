@@ -27,6 +27,19 @@ and open the template in the editor.
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
+
+._MODAL_EDIT_TITLE {}
+._TODO_DEADLINE {}
+._TODO_FINISHED {}
+._TODO_TITLE {}
+.loader {}
+.save-btn {}
+.text {}
+
+/*
+Bootstrap addons:
+*/
+
 .gly-spin {
     -webkit-animation: spin 2s infinite linear;
     -moz-animation: spin 2s infinite linear;
