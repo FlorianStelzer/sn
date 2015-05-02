@@ -14,9 +14,9 @@
     <module name="sn_todo_django" />
     <option name="launchJavascriptDebuger" value="false" />
     <option name="port" value="8000" />
-    <option name="host" value="" />
+    <option name="host" value="0.0.0.0" />
     <option name="additionalOptions" value="" />
-    <option name="browserUrl" value="" />
+    <option name="browserUrl" value="http://127.0.0.1:8000/" />
     <option name="runTestServer" value="false" />
     <option name="runNoReload" value="false" />
     <option name="useCustomRunCommand" value="false" />
