@@ -1,0 +1,48 @@
+{% extends 'TUTodo/base.html' %}
+{% block content %}
+    {% include 'TUTodo/includes/navbar.html' with active='index' %}
+    <div class="container">
+        <div class="panel panel-default">
+            <form method="post" action="{% url 'TUTodo:add' %}">
+                {% csrf_token %}
+                <div class="panel-heading">
+                    <h4 class="modal-title">Neu</h4>
+                </div>
+                <div class="panel-body">
+                    <p>Du legst gerade ein TODO an</p>
+                    <label for="title">Titel</label>
+                    <input class="form-control" type="text" value="" id="title" name="title"
+                           placeholder="Titel"/>
+                    <label for="deadline">Deadline</label>
+                    <div style="position:relative;">
+                        <input class="form-control datetime"
+                               type="text"
+                               name="deadline"
+                                placeholder="Deadline"/>
+                    </div>
+                    <label for="finished">Finished</label>
+
+                    <div class="input-group">
+                        <input class="form-control"
+                               id="finished"
+                               type="number"
+                               name="finished"
+                               value="0"
+                               min="0"
+                               max="100"/>
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="save-btn btn btn-success">
+                        <span class="text">Speichern</span>
+                    </button>
+                    <button type="reset" class="btn btn-default">Zurücksetzen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $('.datetime').datetimepicker({locale: 'de', sideBySide: true, format: 'DD.MM.YYYY HH:mm'});
+    </script>
+{% endblock %}

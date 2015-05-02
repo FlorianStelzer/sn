@@ -1,37 +1,46 @@
-<h1>Deine TODOs</h1>
-{% if todo_list %}
-    <div class="row">
-        <div class="col-md-5"><h4>Titel</h4></div>
-        <div class="col-md-3"><h4>Deadline</h4></div>
-        <div class="col-md-4"><h4>Fertiggestellt</h4></div>
-    </div>
-    {% for todo in todo_list %}
-        <div class="container">
+{% extends 'TUTodo/base.html' %}
+{% block content %}
+    {% include 'TUTodo/includes/navbar.html' with active='index' %}
+    <div class="container">
+        <h1>
+            Deine TODOs
+            <a class="btn btn-info btn-lg pull-right" href="{% url 'TUTodo:add' %}">+</a>
+        </h1>
+        {% if todo_list %}
             <div class="row">
-                <div class="col-md-5">
-                    <span class="_TODO_ID">{{ todo.id }}</span>
-                    <strong><span class="_TODO_TITLE">{{ todo.title }}</span></strong>
-                </div>
-                <div class="col-md-3">
-                    <input type="datetime-local"
-                           class="noinput _TODO_DEADLINE"
-                           readonly="readonly"
-                           value="{{ todo.deadline }}"/>
-                </div>
-                <div class="col-md-2">
-                    <span class="_TODO_FINISHED">{{ todo.finished }}</span>
-                </div>
-                <div class="col-md-2">
-                    <a href="{% url 'TUTodo:edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                    <a href="{% url 'TUTodo:delete' todo.id %}" class="btn btn-sm btn-danger remove-btn pull-right"><span
-                            class="glyphicon glyphicon-remove"></span>
-                    </a>
-                </div>
+                <div class="col-md-5"><h4>Titel</h4></div>
+                <div class="col-md-3"><h4>Deadline</h4></div>
+                <div class="col-md-4"><h4>Fertiggestellt</h4></div>
             </div>
-        </div>
-    {% endfor %}
-{% else %}
-    <p>Sie haben keine TODOs</p>
-{% endif %}
+            {% for todo in todo_list %}
+                <div class="container">
+                    <div class="row list-group-item">
+                        <div class="col-md-5">
+                            <span class="_TODO_ID">{{ todo.id }}</span>
+                            <strong><span class="_TODO_TITLE">{{ todo.title }}</span></strong>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="_TODO_DEADLINE">
+                                {{ todo.deadline|date:"d.m.Y H:i" }}
+                            </span>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="_TODO_FINISHED">{{ todo.finished }}%</span>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{% url 'TUTodo:edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <a href="{% url 'TUTodo:delete' todo.id %}"
+                               class="btn btn-sm btn-danger remove-btn pull-right"><span
+                                    class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Sie haben keine TODOs</p>
+        {% endif %}
+    </div>
+{% endblock %}

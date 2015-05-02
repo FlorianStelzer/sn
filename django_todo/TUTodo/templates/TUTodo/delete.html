@@ -1,0 +1,36 @@
+{% extends 'TUTodo/base.html' %}
+{% block content %}
+    {% include 'TUTodo/includes/navbar.html' with active='index' %}
+    <div class="container">
+        <div class="panel panel-default">
+            <form method="post" action="{% url 'TUTodo:delete' todo.id %}">
+                {% csrf_token %}
+                <div class="panel-heading">
+                    <h4 class="modal-title">Möchtest Du wirklich "{{ todo.title }}" löschen?</h4>
+                </div>
+                <div class="panel-body">
+                    <label for="title">Titel</label>
+                    <input class="form-control" type="text" value="{{ todo.title }}" id="title" name="title"
+                           placeholder="Titel" disabled/>
+                    <label for="deadline">Deadline</label>
+                    <input class="form-control" id="deadline" value="{{ todo.deadline|date:"Y-m-d\TH:i:s" }}" type="datetime-local"
+                           name="deadline" disabled/>
+                    <label for="finished">Finished</label>
+
+                    <div class="input-group">
+                        <input class="form-control" id="finished" value="{{ todo.finished }}" type="number"
+                               name="finished" min="0"
+                               max="100" disabled/>
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-default" href="{% url 'TUTodo:index' %}">Nein</a>
+                    <button type="submit" value="yes" name="delete" class="pull-right save-btn btn btn-danger">
+                        <span class="text">Ja</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
