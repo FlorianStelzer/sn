@@ -7,5 +7,5 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^todos/', include('TUTodo.urls')),
+    url(r'^', include('TUTodo.urls', namespace='TUTodo')),
 ]
