@@ -36,10 +36,22 @@ def add(request):
 def edit(request, todo_id):
     todo = get_object_or_404(Todo, pk=todo_id)
     if request.POST:
-        todo.title = request.POST['title']
-        todo.deadline = request.POST['deadline']
-        todo.finished = request.POST['finished']
-        todo.save()
+        try:
+            todo.title = request.POST['title']
+        except KeyError:
+            pass
+        try:
+            todo.deadline = request.POST['deadline']
+        except KeyError:
+            pass
+        try:
+            todo.finished = request.POST['finished']
+        except KeyError:
+            pass
+        try:
+            todo.save()
+        except ValidationError:
+            return HttpResponse('Es wurden ungültige Daten angegeben!')
         return HttpResponseRedirect(reverse('TUTodo:index'))
     return render(request, 'TUTodo/edit.html', {'todo': todo})
 
@@ -50,4 +62,8 @@ def impressum(request):
 
 def delete(request, todo_id):
     todo = get_object_or_404(Todo, pk=todo_id)
+    if request.POST:
+        if request.POST['delete'] == 'yes':
+            todo.delete()
+            return HttpResponseRedirect(reverse('TUTodo:index'))
     return render(request, 'TUTodo/delete.html', {'todo': todo})
