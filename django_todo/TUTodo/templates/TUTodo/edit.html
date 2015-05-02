@@ -14,8 +14,14 @@
                     <input class="form-control" type="text" value="{{ todo.title }}" id="title" name="title"
                            placeholder="Titel"/>
                     <label for="deadline">Deadline</label>
-                    <input class="form-control" id="deadline" value="{{ todo.deadline|date:"Y-m-d\TH:i:s" }}" type="datetime-local"
-                           name="deadline"/>
+
+                    <div style="position:relative;">
+                        <input class="form-control datetime"
+                               id=""
+                               value="{{ todo.deadline|date:"d.m.Y H:i" }}"
+                               type="text"
+                               name="deadline"/>
+                    </div>
                     <label for="finished">Finished</label>
 
                     <div class="input-group">
@@ -34,4 +40,7 @@
             </form>
         </div>
     </div>
+    <script>
+        $('.datetime').datetimepicker({locale: 'de', sideBySide: true, format: 'DD.MM.YYYY HH:mm'});
+    </script>
 {% endblock %}

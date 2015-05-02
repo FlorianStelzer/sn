@@ -14,8 +14,12 @@
                     <input class="form-control" type="text" value="" id="title" name="title"
                            placeholder="Titel"/>
                     <label for="deadline">Deadline</label>
-                    <input class="form-control" id="deadline" value="" type="datetime-local"
-                           name="deadline"/>
+                    <div style="position:relative;">
+                        <input class="form-control datetime"
+                               type="text"
+                               name="deadline"
+                                placeholder="Deadline"/>
+                    </div>
                     <label for="finished">Finished</label>
 
                     <div class="input-group">
@@ -38,4 +42,7 @@
             </form>
         </div>
     </div>
+    <script>
+        $('.datetime').datetimepicker({locale: 'de', sideBySide: true, format: 'DD.MM.YYYY HH:mm'});
+    </script>
 {% endblock %}

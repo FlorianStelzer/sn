@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from .models import Todo
 from django.views import generic
+import datetime
 
 # Create your views here.
 
@@ -41,8 +42,10 @@ def edit(request, todo_id):
         except KeyError:
             pass
         try:
-            todo.deadline = request.POST['deadline']
+            todo.deadline = datetime.datetime.strptime(request.POST['deadline'], '%d.%m.%Y %H:%M')
         except KeyError:
+            pass
+        except ValueError:
             pass
         try:
             todo.finished = request.POST['finished']
