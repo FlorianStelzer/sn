@@ -93,7 +93,7 @@
                     'delete': 'yes',
                     'json': true,
                     'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
-                }, function(d) {
+                }, function (d) {
                     var json = $.parseJSON(d);
                     if (json && json.ok) {
                         // alles ok
