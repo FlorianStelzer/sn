@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="panel panel-info">
+        <form method="post" action="{% url 'TUTodo:edit' todo.id %}">
+            {% csrf_token %}
+            <div class="panel-heading">
+                <h4 class="modal-title">Bearbeiten</h4>
+            </div>
+            <div class="panel-body">
+                <p>Du bearbeitest gerade Dein TODO "{{ todo.title }}"</p>
+                <label for="title">Titel</label>
+                <input class="form-control" type="text" value="{{ todo.title }}" id="title" name="title"
+                       placeholder="Titel"/>
+                <label for="deadline">Deadline</label>
+                <input class="form-control" id="deadline" value="{{ todo.deadline }}" type="datetime-local"
+                       name="deadline"/>
+                <label for="finished">Finished</label>
+
+                <div class="input-group">
+                    <input class="form-control" id="finished" value="{{ todo.finished }}" type="number" name="finished" min="0"
+                           max="100"/>
+                    <span class="input-group-addon">%</span>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="submit" class="save-btn btn btn-success">
+                    <span class="text">Speichern</span>
+                </button>
+                <button type="reset" class="btn btn-default">Zurücksetzen</button>
+            </div>
+        </form>
+    </div>
+</div>

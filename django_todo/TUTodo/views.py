@@ -1,24 +1,46 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.core.exceptions import ValidationError
 from .models import Todo
+from django.views import generic
 
 # Create your views here.
 
 
-def index(request):
-    todo_list = Todo.objects.order_by('-deadline')
-    context = {
-        'todo_list': todo_list
-    }
-    return render(request, 'TUTodo/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'TUTodo/index.html'
+    # auto generated todo_list var in index.html (context_object_name = 'todo_list' sparen wir uns)
+
+    def get_queryset(self):
+        return Todo.objects.order_by('-deadline')
 
 
 def add(request):
+    if request.POST:
+        todo = Todo()
+        try:
+            todo.title = request.POST['title']
+            todo.deadline = request.POST['deadline']
+            todo.finished = request.POST['finished']
+        except KeyError:
+            return HttpResponse('Es wurden nicht alle Daten angegeben!')
+        try:
+            todo.save()
+        except ValidationError:
+            return HttpResponse('Es wurden ungültige Daten angegeben!')
+        return HttpResponseRedirect(reverse('TUTodo:index'))
     return render(request, 'TUTodo/add.html', None)
 
 
 def edit(request, todo_id):
     todo = get_object_or_404(Todo, pk=todo_id)
+    if request.POST:
+        todo.title = request.POST['title']
+        todo.deadline = request.POST['deadline']
+        todo.finished = request.POST['finished']
+        todo.save()
+        return HttpResponseRedirect(reverse('TUTodo:index'))
     return render(request, 'TUTodo/edit.html', {'todo': todo})
 
 
