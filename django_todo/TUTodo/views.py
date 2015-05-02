@@ -70,5 +70,7 @@ def delete(request, todo_id):
     if request.POST:
         if request.POST['delete'] == 'yes':
             todo.delete()
+            if request.POST['json'] == True:
+                return HttpResponse('{ok:true}');
             return HttpResponseRedirect(reverse('TUTodo:index'))
     return render(request, 'TUTodo/delete.html', {'todo': todo})
