@@ -7,6 +7,9 @@ TUTodo is a simple Django todo-Tracker. You can add, edit and delete todos.
 Quick start
 -----------
 
+0.  Download django-TUTodo-X.X.zip Install TUTodo with pip like
+    pip install django-TUTodo-X.X.zip
+
 1. 	Add "TUTodo" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = (
