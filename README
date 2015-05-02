@@ -1,1 +1,27 @@
-Repo for SN
+=====
+TUTodo
+=====
+
+TUTodo is a simple Django todo-Tracker. You can add, edit and delete todos.
+
+Quick start
+-----------
+
+1. 	Add "TUTodo" to your INSTALLED_APPS setting like this::
+
+    INSTALLED_APPS = (
+        ...
+        'TUTodo',
+    )
+
+2. 	Include the TUTodo URLconf in your project urls.py like this:
+
+    url(r'^TUTodo/', include('TUTodo.urls')),
+
+3. 	Run `python manage.py migrate` to create the TUTodo models.
+
+4. 	Start the development server and visit http://127.0.0.1:8000
+	to create a todos.
+
+5. 	Visit http://127.0.0.1:8000/TUTodo/ to manage all you want to 
+	do with a todo.
