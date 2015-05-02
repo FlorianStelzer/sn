@@ -22,10 +22,12 @@ def add(request):
         todo = Todo()
         try:
             todo.title = request.POST['title']
-            todo.deadline = request.POST['deadline']
+            todo.deadline = datetime.datetime.strptime(request.POST['deadline'], '%d.%m.%Y %H:%M')
             todo.finished = request.POST['finished']
         except KeyError:
             return HttpResponse('Es wurden nicht alle Daten angegeben!')
+        except ValueError:
+            pass
         try:
             todo.save()
         except ValidationError:
