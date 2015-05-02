@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <div class="container">
     <div class="panel panel-info">
         <form method="post" action="{% url 'TUTodo:edit' todo.id %}">
@@ -30,3 +32,4 @@
         </form>
     </div>
 </div>
+{% endblock %}

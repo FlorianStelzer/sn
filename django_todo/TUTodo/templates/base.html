@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>TUTodo</title>
+
+    <link rel="stylesheet" href="{% static 'TUTodo/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'TUTodo/css/main.css' %}">
+    <script src="{% static 'TUTodo/js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'TUTodo/js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
