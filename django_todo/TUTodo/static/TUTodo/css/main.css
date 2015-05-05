@@ -30,6 +30,10 @@ and open the template in the editor.
     background-color: inherit;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 ._MODAL_EDIT_TITLE {}
 ._TODO_DEADLINE {}
 ._TODO_FINISHED {}

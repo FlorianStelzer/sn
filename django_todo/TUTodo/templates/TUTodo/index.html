@@ -1,10 +1,21 @@
 {% extends 'TUTodo/base.html' %}
 {% block content %}
     {% include 'TUTodo/includes/navbar.html' with active='index' %}
+    <style>
+        .remove-area {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 10%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
     <div class="container">
         <h1>
             Deine TODOs
-            <a class="btn btn-info btn-lg pull-right" href="{% url 'TUTodo:add' %}">+</a>
+            <a class="btn btn-info btn-lg pull-right" href="{% url 'add' %}">+</a>
         </h1>
         {% if todo_list %}
             <div class="row">
@@ -12,9 +23,9 @@
                 <div class="col-md-3"><h4>Deadline</h4></div>
                 <div class="col-md-4"><h4>Fertiggestellt</h4></div>
             </div>
-            <div class="container">
+            <div class="container todo_list">
                 {% for todo in todo_list %}
-                    <div class="row list-group-item">
+                    <div draggable="true" class="row list-group-item" data-remurl="{% url 'delete' todo.id %}">
                         <div class="col-md-5">
                             <span class="_TODO_ID">{{ todo.id }}</span>
                             <strong><span class="_TODO_TITLE">{{ todo.title }}</span></strong>
@@ -28,19 +39,80 @@
                             <span class="_TODO_FINISHED">{{ todo.finished }}%</span>
                         </div>
                         <div class="col-md-2">
-                            <a href="{% url 'TUTodo:edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
+                            <a href="{% url 'edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
-                            <a href="{% url 'TUTodo:delete' todo.id %}"
-                               class="btn btn-sm btn-danger remove-btn pull-right"><span
-                                    class="glyphicon glyphicon-remove"></span>
+                            <a href="{% url 'delete' todo.id %}" class="btn btn-sm btn-danger remove-btn pull-right">
+                                <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+            <div class="remove-area"></div>
+            {% csrf_token %}
         {% else %}
             <p>Sie haben keine TODOs</p>
         {% endif %}
     </div>
+    <script>
+        var v_to_del = 0.8;
+        var _SLIDE_REMOVER = {};
+        $('.list-group-item').on('dragstart', function (e) {
+            _SLIDE_REMOVER.todo = $(e.target);
+            _SLIDE_REMOVER.todo_clone = _SLIDE_REMOVER.todo.clone(false).prop('id', 'foo');
+            _SLIDE_REMOVER.todo.after(_SLIDE_REMOVER.todo_clone);
+            console.log('Begin slide');
+            _SLIDE_REMOVER.offset = $(e.target).offset();
+            _SLIDE_REMOVER.x = e.originalEvent.pageX - $('.remove-area').offset().left;
+            $(_SLIDE_REMOVER.todo).on('drag', function (e) {
+                var x = e.originalEvent.pageX - $('.remove-area').offset().left;
+                var v = ((_SLIDE_REMOVER.x - x) / _SLIDE_REMOVER.x);
+                v = (v < 0) ? 0 : ((v > 1) ? 1 : v);
+                $(e.target).css({
+                    'position': 'absolute',
+                    'height': 'auto',
+                    'width': '100%',
+                    'z-index': '10',
+                    'background-color': 'rgba(255,0,0,' + v + ')',
+                    'margin-left': e.originalEvent.pageX - _SLIDE_REMOVER.offset.left + 'px'
+                });
+                _SLIDE_REMOVER.v = (_SLIDE_REMOVER.v > v_to_del && v === 0) ? 1 : v;
+            });
+            $('.remove-area').on('dragover', function (e) {
+                console.log('End slide now to remove todo')
+            });
+        });
+        $('.list-group-item').on('dragend', function (e) {
+            _SLIDE_REMOVER.todo_clone.remove();
+            if (_SLIDE_REMOVER.v > v_to_del) {
+                var removedTodo = $(_SLIDE_REMOVER.todo).remove();
+                console.log($(removedTodo).data('remurl'));
+                $.post($(removedTodo).data('remurl'), {
+                    'delete': 'yes',
+                    'json': true,
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val()
+                }, function (d) {
+                    var json = $.parseJSON(d);
+                    if (json && json.ok) {
+                        // alles ok
+                    } else {
+                        console.log('Konnte Todo nicht löschen');
+                    }
+                });
+                console.log('Removed todo')
+            } else {
+                $(e.target).css({
+                    'height': 'auto',
+                    'width': 'auto',
+                    'position': 'relative',
+                    'z-index': 1,
+                    'background-color': 'rgba(255,255,255,0)',
+                    'margin-left': '-15px'
+                });
+            }
+            console.log('End slide');
+            _SLIDE_REMOVER.todo = null;
+        });
+    </script>
 {% endblock %}

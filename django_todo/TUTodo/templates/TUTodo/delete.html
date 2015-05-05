@@ -3,7 +3,7 @@
     {% include 'TUTodo/includes/navbar.html' with active='index' %}
     <div class="container">
         <div class="panel panel-default">
-            <form method="post" action="{% url 'TUTodo:delete' todo.id %}">
+            <form method="post" action="{% url 'delete' todo.id %}">
                 {% csrf_token %}
                 <div class="panel-heading">
                     <h4 class="modal-title">Möchtest Du wirklich "{{ todo.title }}" löschen?</h4>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a class="btn btn-default" href="{% url 'TUTodo:index' %}">Nein</a>
+                    <a class="btn btn-default" href="{% url 'index' %}">Nein</a>
                     <button type="submit" value="yes" name="delete" class="pull-right save-btn btn btn-danger">
                         <span class="text">Ja</span>
                     </button>
