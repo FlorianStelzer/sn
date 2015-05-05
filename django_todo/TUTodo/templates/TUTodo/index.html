@@ -15,7 +15,7 @@
     <div class="container">
         <h1>
             Deine TODOs
-            <a class="btn btn-info btn-lg pull-right" href="{% url 'TUTodo:add' %}">+</a>
+            <a class="btn btn-info btn-lg pull-right" href="{% url 'add' %}">+</a>
         </h1>
         {% if todo_list %}
             <div class="row">
@@ -25,7 +25,7 @@
             </div>
             <div class="container todo_list">
                 {% for todo in todo_list %}
-                    <div draggable="true" class="row list-group-item" data-remurl="{% url 'TUTodo:delete' todo.id %}">
+                    <div draggable="true" class="row list-group-item" data-remurl="{% url 'delete' todo.id %}">
                         <div class="col-md-5">
                             <span class="_TODO_ID">{{ todo.id }}</span>
                             <strong><span class="_TODO_TITLE">{{ todo.title }}</span></strong>
@@ -39,10 +39,10 @@
                             <span class="_TODO_FINISHED">{{ todo.finished }}%</span>
                         </div>
                         <div class="col-md-2">
-                            <a href="{% url 'TUTodo:edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
+                            <a href="{% url 'edit' todo.id %}" class="btn btn-sm btn-info edit-btn pull-right">
                                 <span class="glyphicon glyphicon-edit"></span>
                             </a>
-                            <a href="{% url 'TUTodo:delete' todo.id %}"
+                            <a href="{% url 'delete' todo.id %}"
                                class="btn btn-sm btn-danger remove-btn pull-right"><span
                                     class="glyphicon glyphicon-remove"></span>
                             </a>

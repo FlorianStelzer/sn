@@ -3,7 +3,7 @@
     {% include 'TUTodo/includes/navbar.html' with active='index' %}
     <div class="container">
         <div class="panel panel-default">
-            <form method="post" action="{% url 'TUTodo:edit' todo.id %}">
+            <form method="post" action="{% url 'edit' todo.id %}">
                 {% csrf_token %}
                 <div class="panel-heading">
                     <h4 class="modal-title">Bearbeiten</h4>

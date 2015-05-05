@@ -32,7 +32,7 @@ def add(request):
             todo.save()
         except ValidationError:
             return HttpResponse('Es wurden ungültige Daten angegeben!')
-        return HttpResponseRedirect(reverse('TUTodo:index'))
+        return HttpResponseRedirect(reverse('index'))
     return render(request, 'TUTodo/add.html', None)
 
 
@@ -57,7 +57,7 @@ def edit(request, todo_id):
             todo.save()
         except ValidationError:
             return HttpResponse('Es wurden ungültige Daten angegeben!')
-        return HttpResponseRedirect(reverse('TUTodo:index'))
+        return HttpResponseRedirect(reverse('index'))
     return render(request, 'TUTodo/edit.html', {'todo': todo})
 
 
@@ -70,7 +70,10 @@ def delete(request, todo_id):
     if request.POST:
         if request.POST['delete'] == 'yes':
             todo.delete()
-            if request.POST['json'] == True:
-                return HttpResponse('{ok:true}');
-            return HttpResponseRedirect(reverse('TUTodo:index'))
+            try:
+                if request.POST['json'] == True:
+                    return HttpResponse('{ok:true}');
+            except KeyError:
+                pass
+            return HttpResponseRedirect(reverse('index'))
     return render(request, 'TUTodo/delete.html', {'todo': todo})
