@@ -13,7 +13,7 @@ Prerequisites
     Create a (new) Project
 
 
-0.  Download latest django-TUTodo-X.X.zip Install TUTodo with pip like
+0.  Download latest dist/django-TUTodo-X.X.zip Install TUTodo with pip like
     pip install django-TUTodo-X.X.zip
 
 1. 	Add "TUTodo" to your INSTALLED_APPS setting like this::
